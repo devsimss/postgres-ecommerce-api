@@ -57,7 +57,7 @@ def create_order(db: Session, data: schemas.OrderCreate) -> models.Order:
             raise ValueError(f"Insufficient stock for product {prod.id}")
         unit = prod.price_cents
         total += unit * it.quantity
-        prod.stock_qty -= it.quantity  # simple reservation
+        prod.stock_qty -= it.quantity  
         db.add(models.OrderItem(order_id=order.id, product_id=prod.id, quantity=it.quantity, unit_price_cents=unit))
 
     order.total_cents = total
